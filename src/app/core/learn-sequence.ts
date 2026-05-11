@@ -1,6 +1,7 @@
 import { CONFUSABLE_PAIRS, allCurriculumLetters, getLatinHintForLetter } from './curriculum';
 
 export type LearnStep =
+  | { readonly kind: 'alphabet-overview' }
   | {
       readonly kind: 'pair-intro';
       readonly pairId: string;
@@ -24,11 +25,10 @@ function shuffle<T>(items: T[], random: () => number): T[] {
 }
 
 /**
- * Ordered learning path: introduce each confusable pair, then one guided match per letter.
- * Uses the same letter pool as the practice quiz (curriculum subset).
+ * Learning path: full alphabet grid → confusable pairs → one guided match per letter.
  */
 export function buildLearnSteps(random: () => number): LearnStep[] {
-  const steps: LearnStep[] = [];
+  const steps: LearnStep[] = [{ kind: 'alphabet-overview' }];
   for (const p of CONFUSABLE_PAIRS) {
     steps.push({
       kind: 'pair-intro',

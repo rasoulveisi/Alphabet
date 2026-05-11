@@ -1,13 +1,16 @@
-:root {
-  font-family:
-    system-ui,
-    'Noto Sans Armenian',
-    'Segoe UI Armenian',
-    sans-serif;
-  color: #111;
-  background: #fafafa;
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    system-ui, 'Noto Sans Armenian', 'Segoe UI Armenian', ui-sans-serif, sans-serif;
 }
 
-body {
-  margin: 0;
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply min-h-dvh bg-neutral-50 font-sans text-neutral-900 antialiased;
+  }
 }

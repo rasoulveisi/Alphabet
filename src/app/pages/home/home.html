@@ -1,10 +1,20 @@
-<section class="home">
-  <h1 class="title">Armenian script</h1>
-  <p class="lede">Decode letters you see on signs — not a language course.</p>
-  <ol class="steps">
-    <li><strong>Learn</strong> — see each letter pair, then short match checks.</li>
-    <li><strong>Practice</strong> — mixed quiz with fading hints.</li>
+<section class="mx-auto flex max-w-md flex-col gap-5 px-4 py-8">
+  <h1 class="text-2xl font-semibold tracking-tight text-neutral-900">Armenian script</h1>
+  <p class="text-sm leading-relaxed text-neutral-600">
+    Decode letters you see on signs — not a language course.
+  </p>
+  <ol class="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-neutral-600">
+    <li><strong class="text-neutral-800">Learn</strong> — full alphabet, then easy-to-confuse pairs, then match checks.</li>
+    <li><strong class="text-neutral-800">Practice</strong> — mixed quiz with fading hints.</li>
   </ol>
-  <a class="primary" routerLink="/learn">Learn the alphabet</a>
-  <a class="secondary" routerLink="/session">Skip to practice quiz</a>
+  <a
+    class="inline-flex min-h-12 items-center justify-center rounded-lg bg-neutral-900 px-4 text-center text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+    routerLink="/learn"
+    >Learn the alphabet</a
+  >
+  <a
+    class="inline-flex min-h-12 items-center justify-center text-base font-semibold text-neutral-900 underline decoration-neutral-400 underline-offset-4"
+    routerLink="/session"
+    >Skip to practice quiz</a
+  >
 </section>

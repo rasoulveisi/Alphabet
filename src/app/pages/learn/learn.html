@@ -1,40 +1,95 @@
 @if (done()) {
-  <section class="panel summary">
-    <h2 class="h2">You finished the alphabet walkthrough</h2>
-    <p class="lede">Next, practice reading with mixed exercises.</p>
-    <a class="primary" routerLink="/session">Start practice quiz</a>
-    <a class="secondary" routerLink="/">Back home</a>
+  <section
+    class="mx-auto flex max-w-md flex-col items-center gap-4 px-4 py-6 text-center"
+  >
+    <h2 class="text-xl font-semibold text-neutral-900">You finished the alphabet walkthrough</h2>
+    <p class="text-sm leading-relaxed text-neutral-600">
+      Next, practice reading with mixed exercises.
+    </p>
+    <a
+      class="inline-flex min-h-12 w-full max-w-xs items-center justify-center rounded-lg bg-neutral-900 px-4 text-center text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:w-auto"
+      routerLink="/session"
+      >Start practice quiz</a
+    >
+    <a
+      class="text-base font-semibold text-blue-700 underline decoration-blue-700/30 underline-offset-4"
+      routerLink="/"
+      >Back home</a
+    >
   </section>
 } @else if (current(); as step) {
-  <header class="bar">
-    <span class="badge">Learn</span>
-    <span class="count">{{ stepLabel() }}</span>
+  <header class="mx-auto mb-4 flex max-w-md items-center justify-between px-4">
+    <span class="text-xs font-bold uppercase tracking-wide text-neutral-600">Learn</span>
+    <span class="tabular-nums text-sm text-neutral-500">{{ stepLabel() }}</span>
   </header>
 
   @switch (step.kind) {
-    @case ('pair-intro') {
-      <section class="panel">
-        <h2 class="h2">Two letters people mix up</h2>
-        <p class="lede">Read each shape with its temporary Latin hint. Hints fade later in practice.</p>
-        <div class="pair-row">
-          <div class="glyph-block">
-            <span class="glyph">{{ step.glyphs[0] }}</span>
-            <span class="sub">{{ step.latinHints[0] }}</span>
-          </div>
-          <div class="glyph-block">
-            <span class="glyph">{{ step.glyphs[1] }}</span>
-            <span class="sub">{{ step.latinHints[1] }}</span>
+    @case ('alphabet-overview') {
+      <section class="mx-auto max-w-lg px-4 pb-8">
+        <h2 class="mb-1 text-lg font-semibold text-neutral-900">Full Armenian alphabet</h2>
+        <p class="mb-4 text-sm leading-relaxed text-neutral-600">
+          39 letters in standard order. Latin hints are temporary scaffolds — they fade in practice.
+        </p>
+        <div
+          class="max-h-[65dvh] overflow-y-auto overscroll-contain rounded-xl border border-neutral-200 bg-white p-3 shadow-sm sm:max-h-none sm:overflow-visible"
+        >
+          <div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5 md:grid-cols-5">
+            @for (row of alphabet; track row.letter) {
+              <div
+                class="flex min-h-[4.25rem] flex-col items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/80 px-1 py-2 text-center"
+              >
+                <span class="text-2xl leading-none sm:text-[1.65rem]">{{ row.letter }}</span>
+                <span class="mt-1 line-clamp-2 text-[0.65rem] leading-tight text-neutral-600 sm:text-xs">{{
+                  row.latinHint
+                }}</span>
+              </div>
+            }
           </div>
         </div>
-        <button type="button" class="primary-btn" (click)="nextFromIntro()">Next</button>
+        <button
+          type="button"
+          class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-neutral-900 px-4 text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          (click)="nextFromIntro()"
+        >
+          Next: easy-to-confuse pairs
+        </button>
+      </section>
+    }
+    @case ('pair-intro') {
+      <section class="mx-auto flex max-w-md flex-col gap-4 px-4">
+        <h2 class="text-lg font-semibold text-neutral-900">Two letters people mix up</h2>
+        <p class="text-sm leading-relaxed text-neutral-600">
+          Read each shape with its temporary Latin hint. Hints fade later in practice.
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+          <div
+            class="flex flex-col items-center gap-1 rounded-xl border border-neutral-200 bg-white px-2 py-4 shadow-sm"
+          >
+            <span class="text-4xl leading-none sm:text-5xl">{{ step.glyphs[0] }}</span>
+            <span class="text-center text-sm text-neutral-700">{{ step.latinHints[0] }}</span>
+          </div>
+          <div
+            class="flex flex-col items-center gap-1 rounded-xl border border-neutral-200 bg-white px-2 py-4 shadow-sm"
+          >
+            <span class="text-4xl leading-none sm:text-5xl">{{ step.glyphs[1] }}</span>
+            <span class="text-center text-sm text-neutral-700">{{ step.latinHints[1] }}</span>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-neutral-900 px-4 text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          (click)="nextFromIntro()"
+        >
+          Next
+        </button>
       </section>
     }
     @case ('match-letter') {
-      <section class="panel">
-        <h2 class="h2">Match the letter</h2>
-        <p class="lede">Tap the Armenian letter that goes with the hint.</p>
+      <section class="mx-auto flex max-w-md flex-col gap-3 px-4">
+        <h2 class="text-lg font-semibold text-neutral-900">Match the letter</h2>
+        <p class="text-sm text-neutral-600">Tap the Armenian letter that goes with the hint.</p>
         @if (showWrong()) {
-          <p class="warn" role="status">Not quite — try again.</p>
+          <p class="text-sm font-semibold text-amber-800" role="status">Not quite — try again.</p>
         }
         <app-letter-pick
           [targetLetter]="step.targetLetter"

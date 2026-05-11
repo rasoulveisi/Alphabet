@@ -1,10 +1,22 @@
-<section class="card">
-  <p class="prompt">Which letter matches the hint?</p>
+<section class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <p class="mb-3 text-sm font-medium text-neutral-800">Which letter matches the hint?</p>
   @if (scaffold(); as hint) {
-    <p class="hint" data-testid="latin-hint">{{ hint }}</p>
+    <p class="mb-4 text-sm text-neutral-600" data-testid="latin-hint">{{ hint }}</p>
   }
-  <div class="grid">
-    <button type="button" class="tile" (click)="pick(glyphs()[0])">{{ glyphs()[0] }}</button>
-    <button type="button" class="tile" (click)="pick(glyphs()[1])">{{ glyphs()[1] }}</button>
+  <div class="grid grid-cols-2 gap-4">
+    <button
+      type="button"
+      class="flex min-h-16 touch-manipulation items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 px-3 text-4xl leading-none text-neutral-900 shadow-sm outline-none transition-colors hover:bg-neutral-100 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:bg-neutral-200 sm:min-h-20 sm:text-5xl"
+      (click)="pick(glyphs()[0])"
+    >
+      {{ glyphs()[0] }}
+    </button>
+    <button
+      type="button"
+      class="flex min-h-16 touch-manipulation items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 px-3 text-4xl leading-none text-neutral-900 shadow-sm outline-none transition-colors hover:bg-neutral-100 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:bg-neutral-200 sm:min-h-20 sm:text-5xl"
+      (click)="pick(glyphs()[1])"
+    >
+      {{ glyphs()[1] }}
+    </button>
   </div>
 </section>

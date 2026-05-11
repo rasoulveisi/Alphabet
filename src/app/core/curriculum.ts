@@ -1,4 +1,5 @@
 import type { ConfusablePair } from './models';
+import { EASTERN_ARMENIAN_ALPHABET } from './armenian-alphabet';
 
 export const CONFUSABLE_PAIRS: readonly ConfusablePair[] = [
   {
@@ -27,22 +28,13 @@ export function getPairById(id: string): ConfusablePair | undefined {
   return CONFUSABLE_PAIRS.find((p) => p.id === id);
 }
 
-/** Latin scaffold for a single Armenian glyph from the curriculum table. */
-export function getLatinHintForLetter(letter: string): string {
-  for (const p of CONFUSABLE_PAIRS) {
-    const i = p.glyphs.indexOf(letter);
-    if (i >= 0) {
-      return p.latinHints[i] ?? '';
-    }
-  }
-  return '';
+/** Full alphabet order (39 letters, including և). */
+export function allCurriculumLetters(): string[] {
+  return EASTERN_ARMENIAN_ALPHABET.map((e) => e.letter);
 }
 
-export function allCurriculumLetters(): string[] {
-  const set = new Set<string>();
-  for (const p of CONFUSABLE_PAIRS) {
-    set.add(p.glyphs[0]);
-    set.add(p.glyphs[1]);
-  }
-  return [...set].sort((a, b) => a.localeCompare(b, 'hy'));
+/** Latin scaffold for any letter in the Eastern Armenian alphabet. */
+export function getLatinHintForLetter(letter: string): string {
+  const hit = EASTERN_ARMENIAN_ALPHABET.find((e) => e.letter === letter);
+  return hit?.latinHint ?? '';
 }

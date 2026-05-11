@@ -6,7 +6,6 @@ import type { HintLevel } from '../../core/models';
   selector: 'app-letter-pick',
   imports: [],
   templateUrl: './letter-pick.html',
-  styleUrl: './letter-pick.css',
 })
 export class LetterPick {
   readonly targetLetter = input.required<string>();

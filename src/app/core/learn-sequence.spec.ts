@@ -10,8 +10,9 @@ function rng(seed: number) {
 }
 
 describe('learn-sequence', () => {
-  it('starts with one pair-intro per curriculum pair', () => {
+  it('starts with alphabet overview then pair-intro for each pair', () => {
     const steps = buildLearnSteps(rng(1));
+    expect(steps[0]?.kind).toBe('alphabet-overview');
     const intros = steps.filter((s) => s.kind === 'pair-intro');
     expect(intros.length).toBe(CONFUSABLE_PAIRS.length);
     for (let i = 0; i < CONFUSABLE_PAIRS.length; i++) {

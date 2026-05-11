@@ -18,7 +18,7 @@ describe('MinimalPairPick', () => {
     let out = '';
     fixture.componentInstance.chosen.subscribe((c) => (out = c));
     fixture.detectChanges();
-    const buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('button.tile');
+    const buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('button[type="button"]');
     (buttons[0] as HTMLButtonElement).click();
     expect(out).toBe('է');
   });

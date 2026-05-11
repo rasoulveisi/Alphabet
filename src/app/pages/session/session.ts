@@ -11,7 +11,6 @@ import { ProgressService } from '../../services/progress.service';
   selector: 'app-session',
   imports: [LetterPick, MinimalPairPick, RouterLink],
   templateUrl: './session.html',
-  styleUrl: './session.css',
 })
 export class Session {
   private readonly progress = inject(ProgressService);

@@ -1,16 +1,18 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { buildLearnSteps, type LearnStep } from '../../core/learn-sequence';
+import { EASTERN_ARMENIAN_ALPHABET } from '../../core/armenian-alphabet';
+import { buildLearnSteps } from '../../core/learn-sequence';
 import { LetterPick } from '../../exercises/letter-pick/letter-pick';
 
 @Component({
   selector: 'app-learn',
   imports: [LetterPick, RouterLink],
   templateUrl: './learn.html',
-  styleUrl: './learn.css',
 })
 export class Learn {
-  private readonly steps: readonly LearnStep[] = buildLearnSteps(Math.random);
+  protected readonly alphabet = EASTERN_ARMENIAN_ALPHABET;
+
+  private readonly steps = buildLearnSteps(Math.random);
 
   protected readonly index = signal(0);
   protected readonly current = computed(() => this.steps[this.index()] ?? null);

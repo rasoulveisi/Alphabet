@@ -6,7 +6,6 @@ import type { HintLevel } from '../../core/models';
   selector: 'app-minimal-pair-pick',
   imports: [],
   templateUrl: './minimal-pair-pick.html',
-  styleUrl: './minimal-pair-pick.css',
 })
 export class MinimalPairPick {
   readonly glyphs = input.required<readonly [string, string]>();

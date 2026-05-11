@@ -1,11 +1,17 @@
-<section class="card">
-  <p class="prompt">Tap the matching letter.</p>
+<section class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <p class="mb-3 text-sm font-medium text-neutral-800">Tap the matching letter.</p>
   @if (scaffold(); as hint) {
-    <p class="hint" data-testid="latin-hint">{{ hint }}</p>
+    <p class="mb-4 text-sm text-neutral-600" data-testid="latin-hint">{{ hint }}</p>
   }
-  <div class="grid">
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-3">
     @for (opt of options(); track opt) {
-      <button type="button" class="tile" (click)="pick(opt)">{{ opt }}</button>
+      <button
+        type="button"
+        class="flex min-h-14 touch-manipulation items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 px-2 text-3xl leading-none text-neutral-900 shadow-sm outline-none transition-colors hover:bg-neutral-100 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:bg-neutral-200 sm:min-h-16 sm:text-4xl"
+        (click)="pick(opt)"
+      >
+        {{ opt }}
+      </button>
     }
   </div>
 </section>

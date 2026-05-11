@@ -26,15 +26,16 @@ describe('curriculum', () => {
     expect(getPairById('__missing__')).toBeUndefined();
   });
 
-  it('allCurriculumLetters returns unique sorted code points from pairs', () => {
+  it('allCurriculumLetters returns the full Eastern Armenian alphabet in order', () => {
     const letters = allCurriculumLetters();
+    expect(letters.length).toBe(39);
     expect(new Set(letters).size).toBe(letters.length);
-    expect(letters.length).toBeGreaterThanOrEqual(4);
   });
 
   it('getLatinHintForLetter returns hint for glyphs in curriculum', () => {
     expect(getLatinHintForLetter('է').length).toBeGreaterThan(0);
     expect(getLatinHintForLetter('ե').length).toBeGreaterThan(0);
+    expect(getLatinHintForLetter('և').length).toBeGreaterThan(0);
     expect(getLatinHintForLetter('?')).toBe('');
   });
 });
