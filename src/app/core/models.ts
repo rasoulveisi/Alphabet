@@ -6,3 +6,14 @@ export interface ConfusablePair {
   readonly glyphs: readonly [string, string];
   readonly latinHints: readonly [string, string];
 }
+
+export interface LetterProgress {
+  readonly hintLevel: HintLevel;
+  readonly consecutiveCorrect: number;
+  readonly wrongAnswers: number;
+}
+
+export interface AppProgress {
+  readonly version: 1;
+  readonly letters: Readonly<Record<string, LetterProgress>>;
+}
