@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   templateUrl: './app.html',
   host: {
-    class: 'flex min-h-0 flex-1 flex-col',
+    class: 'flex min-h-0 flex-1 flex-col overflow-hidden',
   },
 })
 export class App {}

@@ -8,7 +8,7 @@ import { PageNavBackController } from '../../services/page-nav-back.controller';
   imports: [RouterLink],
   template: `
     <nav
-      class="mx-auto mb-3 flex max-w-md items-center justify-between gap-3 border-b border-neutral-200 pb-3"
+      class="mx-auto flex w-full max-w-md items-center justify-between gap-3"
       aria-label="Page"
     >
       <button
