@@ -7,6 +7,9 @@ import { PageNav } from '../../ui/page-nav/page-nav';
   selector: 'app-home',
   imports: [RouterLink, PageNav],
   templateUrl: './home.html',
+  host: {
+    class: 'flex min-h-0 flex-1 flex-col overflow-hidden',
+  },
 })
 export class Home {
   protected readonly scripts = ALL_SCRIPTS;

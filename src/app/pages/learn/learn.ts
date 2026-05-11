@@ -18,6 +18,9 @@ import { ScriptContextService } from '../../services/script-context.service';
   selector: 'app-learn',
   imports: [LetterPick, RouterLink],
   templateUrl: './learn.html',
+  host: {
+    class: 'flex min-h-0 flex-1 flex-col overflow-hidden',
+  },
 })
 export class Learn {
   protected readonly ctx = inject(ScriptContextService);

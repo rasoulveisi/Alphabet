@@ -9,9 +9,18 @@ import { PageNav } from '../../ui/page-nav/page-nav';
 @Component({
   selector: 'app-script-shell',
   imports: [RouterOutlet, PageNav],
+  host: {
+    class: 'flex min-h-0 flex-1 flex-col overflow-hidden',
+  },
   template: `
-    <app-page-nav />
-    <router-outlet />
+    <header
+      class="shrink-0 border-b border-neutral-200 bg-neutral-50/95 px-3 pb-3 pt-2 backdrop-blur-sm sm:px-4"
+    >
+      <app-page-nav />
+    </header>
+    <div class="flex min-h-0 flex-1 flex-col overflow-hidden">
+      <router-outlet />
+    </div>
   `,
   providers: [ScriptContextService, ProgressService, PageNavBackController],
 })

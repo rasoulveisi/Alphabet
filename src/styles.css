@@ -10,7 +10,21 @@
     color-scheme: light;
   }
 
+  html {
+    @apply h-full min-h-0;
+  }
+
   body {
-    @apply min-h-screen bg-neutral-50 font-sans text-neutral-900 antialiased;
+    @apply flex min-h-0 flex-col touch-manipulation overflow-x-hidden bg-neutral-50 font-sans text-base text-neutral-900 antialiased;
+    /* Mobile viewport: svh (UI-stable), dvh (dynamic), lvh (max) — later wins where supported */
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    min-height: 100lvh;
+  }
+
+  app-root {
+    @apply flex min-h-0 flex-1 flex-col;
+    min-height: inherit;
   }
 }
