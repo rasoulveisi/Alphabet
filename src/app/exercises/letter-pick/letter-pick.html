@@ -1,0 +1,11 @@
+<section class="card">
+  <p class="prompt">Tap the matching letter.</p>
+  @if (scaffold(); as hint) {
+    <p class="hint" data-testid="latin-hint">{{ hint }}</p>
+  }
+  <div class="grid">
+    @for (opt of options(); track opt) {
+      <button type="button" class="tile" (click)="pick(opt)">{{ opt }}</button>
+    }
+  </div>
+</section>

@@ -1,0 +1,27 @@
+@if (done()) {
+  <section class="summary">
+    <h2>Session complete</h2>
+    <a routerLink="/">Back home</a>
+  </section>
+} @else if (current(); as ex) {
+  @switch (ex.kind) {
+    @case ('letter-pick') {
+      <app-letter-pick
+        [targetLetter]="ex.targetLetter"
+        [latinFull]="ex.latinFull"
+        [hintLevel]="hintFor(ex.targetLetter)"
+        [options]="ex.options"
+        (chosen)="onAnswer(ex.targetLetter, $event === ex.targetLetter)"
+      />
+    }
+    @case ('minimal-pair') {
+      <app-minimal-pair-pick
+        [glyphs]="ex.glyphs"
+        [targetLetter]="ex.targetLetter"
+        [latinFull]="ex.latinFull"
+        [hintLevel]="hintFor(ex.targetLetter)"
+        (chosen)="onAnswer(ex.targetLetter, $event === ex.targetLetter)"
+      />
+    }
+  }
+}

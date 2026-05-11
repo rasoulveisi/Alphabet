@@ -1,0 +1,10 @@
+<section class="card">
+  <p class="prompt">Which letter matches the hint?</p>
+  @if (scaffold(); as hint) {
+    <p class="hint" data-testid="latin-hint">{{ hint }}</p>
+  }
+  <div class="grid">
+    <button type="button" class="tile" (click)="pick(glyphs()[0])">{{ glyphs()[0] }}</button>
+    <button type="button" class="tile" (click)="pick(glyphs()[1])">{{ glyphs()[1] }}</button>
+  </div>
+</section>
