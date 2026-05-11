@@ -1,7 +1,7 @@
 import type { AppProgress, HintLevel, LetterProgress } from './models';
 
 export function progressStorageKey(scriptId: string): string {
-  return `reading-trainer-v1-${scriptId}`;
+  return `letterwise-v1-${scriptId}`;
 }
 
 export function emptyProgress(): AppProgress {

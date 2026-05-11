@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "alphabet": {
+    "letterwise": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -55,10 +55,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "alphabet:build:production"
+              "buildTarget": "letterwise:build:production"
             },
             "development": {
-              "buildTarget": "alphabet:build:development"
+              "buildTarget": "letterwise:build:development"
             }
           },
           "defaultConfiguration": "development"

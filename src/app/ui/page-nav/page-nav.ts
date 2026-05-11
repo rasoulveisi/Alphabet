@@ -22,7 +22,7 @@ import { PageNavBackController } from '../../services/page-nav-back.controller';
       <a
         routerLink="/"
         class="inline-flex min-h-11 min-w-[4.5rem] items-center justify-center rounded-lg border border-neutral-900 bg-neutral-900 px-3 text-sm font-semibold text-white outline-none transition-colors active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-        aria-label="Home — choose a script"
+        aria-label="Letterwise home — choose a script"
       >
         Home
       </a>

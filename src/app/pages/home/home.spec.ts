@@ -14,7 +14,7 @@ describe('Home', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Street script trainer');
+    expect(el.textContent).toContain('Letterwise');
     expect(el.textContent).toContain('Armenian');
   });
 });
