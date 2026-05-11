@@ -2,13 +2,11 @@
   <section
     class="mx-auto flex max-w-md flex-col items-center gap-4 px-4 py-6 text-center"
   >
-    <h2 class="text-xl font-semibold text-neutral-900">You finished the alphabet walkthrough</h2>
-    <p class="text-sm leading-relaxed text-neutral-600">
-      Next, practice reading with mixed exercises.
-    </p>
+    <h2 class="text-xl font-semibold text-neutral-900">You finished the walkthrough</h2>
+    <p class="text-sm leading-relaxed text-neutral-600">Next, practice with mixed exercises.</p>
     <a
       class="inline-flex min-h-12 w-full max-w-xs items-center justify-center rounded-lg bg-neutral-900 px-4 text-center text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:w-auto"
-      routerLink="/session"
+      routerLink="../session"
       >Start practice quiz</a
     >
     <a
@@ -25,41 +23,41 @@
 
   @switch (step.kind) {
     @case ('alphabet-overview') {
-      <section class="mx-auto max-w-lg px-4 pb-8">
-        <h2 class="mb-1 text-lg font-semibold text-neutral-900">Full Armenian alphabet</h2>
-        <p class="mb-4 text-sm leading-relaxed text-neutral-600">
-          39 letters in standard order. Latin hints are temporary scaffolds — they fade in practice.
-        </p>
-        <div
-          class="max-h-[65dvh] overflow-y-auto overscroll-contain rounded-xl border border-neutral-200 bg-white p-3 shadow-sm sm:max-h-none sm:overflow-visible"
-        >
-          <div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5 md:grid-cols-5">
-            @for (row of alphabet; track row.letter) {
-              <div
-                class="flex min-h-[4.25rem] flex-col items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/80 px-1 py-2 text-center"
-              >
-                <span class="text-2xl leading-none sm:text-[1.65rem]">{{ row.letter }}</span>
-                <span class="mt-1 line-clamp-2 text-[0.65rem] leading-tight text-neutral-600 sm:text-xs">{{
-                  row.latinHint
-                }}</span>
-              </div>
-            }
+      @if (ctx.definition(); as def) {
+        <section class="mx-auto max-w-lg px-4 pb-8">
+          <h2 class="mb-1 text-lg font-semibold text-neutral-900">{{ def.overviewTitle }}</h2>
+          <p class="mb-4 text-sm leading-relaxed text-neutral-600">{{ def.overviewSubtitle }}</p>
+          <div
+            class="max-h-[65dvh] overflow-y-auto overscroll-contain rounded-xl border border-neutral-200 bg-white p-3 shadow-sm sm:max-h-none sm:overflow-visible"
+          >
+            <div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5 md:grid-cols-5">
+              @for (row of alphabet(); track row.letter) {
+                <div
+                  class="flex min-h-[4.25rem] flex-col items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/80 px-1 py-2 text-center"
+                >
+                  <span class="text-2xl leading-none sm:text-[1.65rem]">{{ row.letter }}</span>
+                  <span class="mt-1 line-clamp-2 text-[0.65rem] leading-tight text-neutral-600 sm:text-xs">{{
+                    row.latinHint
+                  }}</span>
+                </div>
+              }
+            </div>
           </div>
-        </div>
-        <button
-          type="button"
-          class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-neutral-900 px-4 text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-          (click)="nextFromIntro()"
-        >
-          Next: easy-to-confuse pairs
-        </button>
-      </section>
+          <button
+            type="button"
+            class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-neutral-900 px-4 text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            (click)="nextFromIntro()"
+          >
+            Next: easy-to-confuse pairs
+          </button>
+        </section>
+      }
     }
     @case ('pair-intro') {
       <section class="mx-auto flex max-w-md flex-col gap-4 px-4">
-        <h2 class="text-lg font-semibold text-neutral-900">Two letters people mix up</h2>
+        <h2 class="text-lg font-semibold text-neutral-900">Two shapes people mix up</h2>
         <p class="text-sm leading-relaxed text-neutral-600">
-          Read each shape with its temporary Latin hint. Hints fade later in practice.
+          Read each shape with its temporary hint. Hints fade later in practice.
         </p>
         <div class="grid grid-cols-2 gap-3">
           <div
@@ -85,20 +83,22 @@
       </section>
     }
     @case ('match-letter') {
-      <section class="mx-auto flex max-w-md flex-col gap-3 px-4">
-        <h2 class="text-lg font-semibold text-neutral-900">Match the letter</h2>
-        <p class="text-sm text-neutral-600">Tap the Armenian letter that goes with the hint.</p>
-        @if (showWrong()) {
-          <p class="text-sm font-semibold text-amber-800" role="status">Not quite — try again.</p>
-        }
-        <app-letter-pick
-          [targetLetter]="step.targetLetter"
-          [latinFull]="step.latinFull"
-          [hintLevel]="2"
-          [options]="step.options"
-          (chosen)="onLearnMatch(step.targetLetter, $event === step.targetLetter)"
-        />
-      </section>
+      @if (ctx.definition(); as def) {
+        <section class="mx-auto flex max-w-md flex-col gap-3 px-4">
+          <h2 class="text-lg font-semibold text-neutral-900">Match the character</h2>
+          <p class="text-sm text-neutral-600">{{ def.matchPrompt }}</p>
+          @if (showWrong()) {
+            <p class="text-sm font-semibold text-amber-800" role="status">Not quite — try again.</p>
+          }
+          <app-letter-pick
+            [targetLetter]="step.targetLetter"
+            [latinFull]="step.latinFull"
+            [hintLevel]="2"
+            [options]="step.options"
+            (chosen)="onLearnMatch(step.targetLetter, $event === step.targetLetter)"
+          />
+        </section>
+      }
     }
   }
 }

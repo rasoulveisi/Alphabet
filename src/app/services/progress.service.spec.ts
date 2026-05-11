@@ -1,17 +1,29 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { PLATFORM_ID } from '@angular/core';
+import { HY_SCRIPT } from '../core/scripts/hy.script';
 import { ProgressService } from './progress.service';
-import { STORAGE_KEY } from '../core/progress-storage';
+import { progressStorageKey } from '../core/progress-storage';
+import { ScriptContextService } from './script-context.service';
 
 describe('ProgressService', () => {
   afterEach(() => {
     localStorage.clear();
+    TestBed.resetTestingModule();
   });
 
   beforeEach(() => {
+    const ctx = {
+      scriptId: signal<string | undefined>('hy'),
+      definition: signal(HY_SCRIPT),
+    } as unknown as ScriptContextService;
     TestBed.configureTestingModule({
-      providers: [{ provide: PLATFORM_ID, useValue: 'browser' }, ProgressService],
+      providers: [
+        { provide: PLATFORM_ID, useValue: 'browser' },
+        { provide: ScriptContextService, useValue: ctx },
+        ProgressService,
+      ],
     });
   });
 
@@ -30,7 +42,7 @@ describe('ProgressService', () => {
   it('persists to localStorage when browser', () => {
     const svc = TestBed.inject(ProgressService);
     svc.recordLetterOutcome('ե', { correct: false, nextStreak: 0, nextHintLevel: 2 });
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(progressStorageKey('hy'));
     expect(raw).toBeTruthy();
     expect(JSON.parse(raw!).letters['ե'].wrongAnswers).toBeGreaterThanOrEqual(1);
   });

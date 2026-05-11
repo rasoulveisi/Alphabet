@@ -1,14 +1,10 @@
 /**
  * Eastern Armenian alphabet in standard order (39 letters, including և).
- * Latin hints are short pronunciation scaffolds for readers — not a language course.
+ * Roman hints are short pronunciation scaffolds for readers — not a language course.
  */
-export interface AlphabetLetter {
-  readonly letter: string;
-  readonly latinHint: string;
-}
+import type { AlphabetEntry } from './script-types';
 
-/** Parallel to `ORDER` — one Latin hint per letter. */
-const LATIN_HINTS: readonly string[] = [
+const LATIN_HINTS = [
   'a',
   'b',
   'g',
@@ -48,12 +44,11 @@ const LATIN_HINTS: readonly string[] = [
   'o (open)',
   'f',
   'ev',
-];
+] as const;
 
-const ORDER =
-  'աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև';
+const ORDER = 'աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև';
 
-function buildAlphabet(): readonly AlphabetLetter[] {
+function buildAlphabet(): readonly AlphabetEntry[] {
   const letters = [...ORDER];
   if (letters.length !== LATIN_HINTS.length) {
     throw new Error(
@@ -66,4 +61,4 @@ function buildAlphabet(): readonly AlphabetLetter[] {
   }));
 }
 
-export const EASTERN_ARMENIAN_ALPHABET: readonly AlphabetLetter[] = buildAlphabet();
+export const EASTERN_ARMENIAN_ALPHABET: readonly AlphabetEntry[] = buildAlphabet();

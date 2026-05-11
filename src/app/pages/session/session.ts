@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { afterNextRender, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { buildSessionExercises } from '../../core/session-builder';
 import type { Exercise } from '../../core/models';
@@ -6,6 +6,7 @@ import { nextHintLevelAfterResult } from '../../core/hint-policy';
 import { LetterPick } from '../../exercises/letter-pick/letter-pick';
 import { MinimalPairPick } from '../../exercises/minimal-pair-pick/minimal-pair-pick';
 import { ProgressService } from '../../services/progress.service';
+import { ScriptContextService } from '../../services/script-context.service';
 
 @Component({
   selector: 'app-session',
@@ -13,18 +14,32 @@ import { ProgressService } from '../../services/progress.service';
   templateUrl: './session.html',
 })
 export class Session {
+  private readonly ctx = inject(ScriptContextService);
   private readonly progress = inject(ProgressService);
 
-  private readonly exercises = signal<Exercise[]>(
-    buildSessionExercises(this.progress.state(), {
-      random: Math.random,
-      exerciseCount: 8,
-    }),
-  );
+  private readonly exercises = signal<Exercise[]>([]);
 
   protected readonly index = signal(0);
   protected readonly current = computed(() => this.exercises()[this.index()] ?? null);
-  protected readonly done = computed(() => this.index() >= this.exercises().length);
+  protected readonly done = computed(() => {
+    const total = this.exercises().length;
+    return total > 0 && this.index() >= total;
+  });
+
+  constructor() {
+    afterNextRender(() => {
+      const def = this.ctx.definition();
+      if (!def) {
+        return;
+      }
+      this.exercises.set(
+        buildSessionExercises(def, this.progress.state(), {
+          random: Math.random,
+          exerciseCount: 8,
+        }),
+      );
+    });
+  }
 
   protected hintFor(letter: string) {
     return this.progress.state().letters[letter]?.hintLevel ?? 2;

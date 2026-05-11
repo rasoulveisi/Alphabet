@@ -1,20 +1,23 @@
-<section class="mx-auto flex max-w-md flex-col gap-5 px-4 py-8">
-  <h1 class="text-2xl font-semibold tracking-tight text-neutral-900">Armenian script</h1>
-  <p class="text-sm leading-relaxed text-neutral-600">
-    Decode letters you see on signs — not a language course.
-  </p>
-  <ol class="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-neutral-600">
-    <li><strong class="text-neutral-800">Learn</strong> — full alphabet, then easy-to-confuse pairs, then match checks.</li>
-    <li><strong class="text-neutral-800">Practice</strong> — mixed quiz with fading hints.</li>
-  </ol>
-  <a
-    class="inline-flex min-h-12 items-center justify-center rounded-lg bg-neutral-900 px-4 text-center text-base font-semibold text-white outline-none active:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-    routerLink="/learn"
-    >Learn the alphabet</a
-  >
-  <a
-    class="inline-flex min-h-12 items-center justify-center text-base font-semibold text-neutral-900 underline decoration-neutral-400 underline-offset-4"
-    routerLink="/session"
-    >Skip to practice quiz</a
-  >
+<section class="mx-auto flex max-w-md flex-col gap-6 px-4 py-6">
+  <div>
+    <h1 class="text-2xl font-semibold tracking-tight text-neutral-900">Street script trainer</h1>
+    <p class="mt-2 text-sm leading-relaxed text-neutral-600">
+      Pick a writing system: learn the full character set, then practice with hints that fade. Not a grammar or
+      conversation course.
+    </p>
+  </div>
+
+  <ul class="flex flex-col gap-3">
+    @for (s of scripts; track s.id) {
+      <li>
+        <a
+          class="flex min-h-14 flex-col justify-center rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm outline-none transition-colors active:bg-neutral-50 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          [routerLink]="['/', s.id, 'learn', '0']"
+        >
+          <span class="text-base font-semibold text-neutral-900">{{ s.name }}</span>
+          <span class="text-sm text-neutral-600">{{ s.nativeLabel }} — {{ s.tagline }}</span>
+        </a>
+      </li>
+    }
+  </ul>
 </section>

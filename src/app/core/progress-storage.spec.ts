@@ -3,11 +3,13 @@ import {
   applyLetterResult,
   emptyProgress,
   loadProgress,
+  progressStorageKey,
   saveProgress,
-  STORAGE_KEY,
 } from './progress-storage';
 
 describe('progress-storage', () => {
+  const key = progressStorageKey('test');
+
   afterEach(() => {
     localStorage.clear();
     vi.unstubAllGlobals();
@@ -26,8 +28,8 @@ describe('progress-storage', () => {
       nextStreak: 1,
       nextHintLevel: 2,
     });
-    saveProgress(STORAGE_KEY, updated);
-    const loaded = loadProgress(STORAGE_KEY);
+    saveProgress(key, updated);
+    const loaded = loadProgress(key);
     expect(loaded.letters['է']?.consecutiveCorrect).toBe(1);
   });
 

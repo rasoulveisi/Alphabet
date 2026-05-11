@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildSessionExercises } from './session-builder';
 import { emptyProgress } from './progress-storage';
+import { HY_SCRIPT } from './scripts/hy.script';
 
 function rng(seed: number) {
   return () => {
@@ -11,7 +12,7 @@ function rng(seed: number) {
 
 describe('session-builder', () => {
   it('returns requested length', () => {
-    const exercises = buildSessionExercises(emptyProgress(), {
+    const exercises = buildSessionExercises(HY_SCRIPT, emptyProgress(), {
       random: rng(42),
       exerciseCount: 8,
     });
@@ -19,7 +20,7 @@ describe('session-builder', () => {
   });
 
   it('letter-pick exercises have four unique options including target', () => {
-    const exercises = buildSessionExercises(emptyProgress(), {
+    const exercises = buildSessionExercises(HY_SCRIPT, emptyProgress(), {
       random: rng(1),
       exerciseCount: 10,
     });
@@ -33,7 +34,7 @@ describe('session-builder', () => {
   });
 
   it('minimal-pair exercises reference known pair id', () => {
-    const exercises = buildSessionExercises(emptyProgress(), {
+    const exercises = buildSessionExercises(HY_SCRIPT, emptyProgress(), {
       random: rng(2),
       exerciseCount: 9,
     });

@@ -10,10 +10,11 @@ describe('Home', () => {
     }).compileComponents();
   });
 
-  it('should show start practice action', () => {
+  it('should show script choices', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Learn');
+    expect(el.textContent).toContain('Street script trainer');
+    expect(el.textContent).toContain('Armenian');
   });
 });

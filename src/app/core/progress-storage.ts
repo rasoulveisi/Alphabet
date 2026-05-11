@@ -1,6 +1,8 @@
 import type { AppProgress, HintLevel, LetterProgress } from './models';
 
-export const STORAGE_KEY = 'armenian-decode-progress-v1';
+export function progressStorageKey(scriptId: string): string {
+  return `reading-trainer-v1-${scriptId}`;
+}
 
 export function emptyProgress(): AppProgress {
   return { version: 1, letters: {} };
