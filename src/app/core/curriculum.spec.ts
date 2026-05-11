@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { allCurriculumLetters, CONFUSABLE_PAIRS, getPairById } from './curriculum';
+import {
+  allCurriculumLetters,
+  CONFUSABLE_PAIRS,
+  getLatinHintForLetter,
+  getPairById,
+} from './curriculum';
 
 describe('curriculum', () => {
   it('exposes at least three confusable pairs for MVP', () => {
@@ -25,5 +30,11 @@ describe('curriculum', () => {
     const letters = allCurriculumLetters();
     expect(new Set(letters).size).toBe(letters.length);
     expect(letters.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it('getLatinHintForLetter returns hint for glyphs in curriculum', () => {
+    expect(getLatinHintForLetter('է').length).toBeGreaterThan(0);
+    expect(getLatinHintForLetter('ե').length).toBeGreaterThan(0);
+    expect(getLatinHintForLetter('?')).toBe('');
   });
 });

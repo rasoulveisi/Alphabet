@@ -1,0 +1,49 @@
+@if (done()) {
+  <section class="panel summary">
+    <h2 class="h2">You finished the alphabet walkthrough</h2>
+    <p class="lede">Next, practice reading with mixed exercises.</p>
+    <a class="primary" routerLink="/session">Start practice quiz</a>
+    <a class="secondary" routerLink="/">Back home</a>
+  </section>
+} @else if (current(); as step) {
+  <header class="bar">
+    <span class="badge">Learn</span>
+    <span class="count">{{ stepLabel() }}</span>
+  </header>
+
+  @switch (step.kind) {
+    @case ('pair-intro') {
+      <section class="panel">
+        <h2 class="h2">Two letters people mix up</h2>
+        <p class="lede">Read each shape with its temporary Latin hint. Hints fade later in practice.</p>
+        <div class="pair-row">
+          <div class="glyph-block">
+            <span class="glyph">{{ step.glyphs[0] }}</span>
+            <span class="sub">{{ step.latinHints[0] }}</span>
+          </div>
+          <div class="glyph-block">
+            <span class="glyph">{{ step.glyphs[1] }}</span>
+            <span class="sub">{{ step.latinHints[1] }}</span>
+          </div>
+        </div>
+        <button type="button" class="primary-btn" (click)="nextFromIntro()">Next</button>
+      </section>
+    }
+    @case ('match-letter') {
+      <section class="panel">
+        <h2 class="h2">Match the letter</h2>
+        <p class="lede">Tap the Armenian letter that goes with the hint.</p>
+        @if (showWrong()) {
+          <p class="warn" role="status">Not quite — try again.</p>
+        }
+        <app-letter-pick
+          [targetLetter]="step.targetLetter"
+          [latinFull]="step.latinFull"
+          [hintLevel]="2"
+          [options]="step.options"
+          (chosen)="onLearnMatch(step.targetLetter, $event === step.targetLetter)"
+        />
+      </section>
+    }
+  }
+}

@@ -27,6 +27,17 @@ export function getPairById(id: string): ConfusablePair | undefined {
   return CONFUSABLE_PAIRS.find((p) => p.id === id);
 }
 
+/** Latin scaffold for a single Armenian glyph from the curriculum table. */
+export function getLatinHintForLetter(letter: string): string {
+  for (const p of CONFUSABLE_PAIRS) {
+    const i = p.glyphs.indexOf(letter);
+    if (i >= 0) {
+      return p.latinHints[i] ?? '';
+    }
+  }
+  return '';
+}
+
 export function allCurriculumLetters(): string[] {
   const set = new Set<string>();
   for (const p of CONFUSABLE_PAIRS) {

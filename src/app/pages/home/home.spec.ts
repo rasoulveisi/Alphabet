@@ -14,6 +14,6 @@ describe('Home', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Start');
+    expect(el.textContent).toContain('Learn');
   });
 });

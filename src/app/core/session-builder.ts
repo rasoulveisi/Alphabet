@@ -1,4 +1,4 @@
-import { CONFUSABLE_PAIRS, allCurriculumLetters } from './curriculum';
+import { CONFUSABLE_PAIRS, allCurriculumLetters, getLatinHintForLetter } from './curriculum';
 import type { AppProgress, Exercise } from './models';
 
 export interface BuildSessionOptions {
@@ -27,16 +27,6 @@ function randomItem<T>(arr: readonly T[], random: () => number): T {
   return arr[Math.floor(random() * arr.length)] as T;
 }
 
-function latinForLetter(letter: string): string {
-  for (const p of CONFUSABLE_PAIRS) {
-    const i = p.glyphs.indexOf(letter);
-    if (i >= 0) {
-      return p.latinHints[i] ?? '';
-    }
-  }
-  return '';
-}
-
 function buildLetterPick(weak: string[], random: () => number): Exercise {
   const letters = allCurriculumLetters();
   const target = weak.length ? randomItem(weak, random) : randomItem(letters, random);
@@ -45,7 +35,7 @@ function buildLetterPick(weak: string[], random: () => number): Exercise {
   return {
     kind: 'letter-pick',
     targetLetter: target,
-    latinFull: latinForLetter(target),
+    latinFull: getLatinHintForLetter(target),
     options,
   };
 }
