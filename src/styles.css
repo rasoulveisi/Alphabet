@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  font-family:
+    system-ui,
+    'Noto Sans Armenian',
+    'Segoe UI Armenian',
+    sans-serif;
+  color: #111;
+  background: #fafafa;
+}
+
+body {
+  margin: 0;
+}
